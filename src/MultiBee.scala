@@ -3,19 +3,18 @@
   */
 
 import jmetal.core._
-import jmetal.problems.cec2009Competition._
 import jmetal.util.PseudoRandom
 import jmetal.util.wrapper.XReal
 import jmetal.util.comparators.DominanceComparator
 
-object MultiBee {
-
-  var NumFoodSources = 100
-  var MaxLimit = 10
+class MultiBee(mproblem:Problem, nfoods:Int, mlimit:Int, iter:Int) extends Algorithm(mproblem:Problem){
+  var NumFoodSources = nfoods
+  var MaxLimit = mlimit
+  val Iterations = iter
   var LimitSources = new Array[Int](NumFoodSources)
   for (i <- 0 until LimitSources.length) LimitSources(i) = 0
   var Sources:SolutionSet = new SolutionSet(NumFoodSources)
-  var MultiProblem:Problem = new UF1("ArrayReal")
+  var MultiProblem:Problem = mproblem
   val DominaceCompare:DominanceComparator = new DominanceComparator()
   var SourcesProbability = new Array[Double](NumFoodSources)
   for (i <- 0 until LimitSources.length) SourcesProbability(i) = 0
@@ -64,7 +63,7 @@ object MultiBee {
 
   def Update(i:Int): Unit ={
     var j: Int = 0
-    while ((j = PseudoRandom.randInt(0, LimitSources.length)) == i) {}
+    while ((j = PseudoRandom.randInt(0, LimitSources.length-1)) == i) {}
     var cursolution = Sources.get(i)
     var nextsolution = Sources.get(j)
     var newsolution = UpdateSolution(cursolution, nextsolution)
@@ -79,8 +78,8 @@ object MultiBee {
     }
   }
   def UpdateSolution(cur:Solution, next:Solution): Solution ={
-    var newsolution:Solution = new Solution(Solution)
-    var position = PseudoRandom.randInt(0, newsolution.numberOfVariables())
+    var newsolution:Solution = new Solution(cur)
+    var position = PseudoRandom.randInt(0, newsolution.numberOfVariables()-1)
     var xcur:XReal = new XReal(newsolution)
     var xnext:XReal = new XReal(next)
     var pvalue = xcur.getValue(position) + PseudoRandom.randDouble(-1, 1)*(xcur.getValue(position) - xnext.getValue(position))
@@ -100,10 +99,16 @@ object MultiBee {
       }
     }
   }
+  override def execute() :SolutionSet={
+    initialize()
+    for (i <-0 until Iterations){
+      SendEmployedBees()
+      SendOnlookerBees()
+      SendScoutBees()
+    }
+    return Sources
+  }
   def main(args: Array[String]) {
-    var LimitSources = new Array[Int](NumFoodSources)
 
-    LimitSources.foreach(print)
-    System.out.println("HelloWorld11111");
   }
 }

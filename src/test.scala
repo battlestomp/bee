@@ -12,7 +12,8 @@ import jmetal.util.JMException
 
 object test {
   def main(args: Array[String]) {
-    val conf = new SparkConf()
-    System.out.println("HelloWorld11");
+    for (i <- 0 until 10) {
+      System.out.print(i)
+    }
   }
 }
