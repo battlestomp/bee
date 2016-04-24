@@ -10,11 +10,12 @@ object MultiBee_main {
     val multiProblem:UF1 = new UF1("Real")
     var NumFoodSources:Int = 100
     var MaxLimit:Int = 10
-    val Iterations:Int = 250
+    val Iterations:Int = 250000
     var algorithm:MultiBee = new MultiBee(multiProblem, NumFoodSources, MaxLimit, Iterations)
     val initTime1 = System.currentTimeMillis();
     var population:SolutionSet = algorithm.execute();
     val estimatedTime = System.currentTimeMillis() - initTime1;
-
+    System.out.println("Total execution time: " + estimatedTime + "ms")
+    population.printObjectivesToFile("FUN1");
   }
 }
