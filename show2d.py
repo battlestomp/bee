@@ -65,8 +65,8 @@ def ShowPic(Xlist, Ylist):
     #plt.show()
 if __name__ == '__main__':
     #Datalist = ReadDataFile('..\data/fun_nsgaii_a0')
-    Datalist1 = ReadDataFile('FUN')
-    Datalist2 = ReadDataFile('FUN1')
+    Datalist1 = ReadDataFile('TEST1')
+    Datalist2 = ReadDataFile('TEST2')
     #Datalist3 = ReadDataFile('..\data/uav_moeadl1')
     markers = []
     for m in Line2D.markers:
@@ -93,9 +93,9 @@ if __name__ == '__main__':
     plt.ylabel(r'$F_b(x)$' , fontsize=20)
     #plot1 = plt.plot(xlist[0], ylist[0], '--', label='MOEAD')
     style = styles[5]
-    plot1 = plt.plot(xlist[0], ylist[0],  label='FUN1', linestyle='None', marker=style, color='black', markersize=5)
+    plot1 = plt.plot(xlist[0], ylist[0],  label='TEST1', linestyle='None', marker=style, color='black', markersize=5)
     style = styles[1]
-    plot2 = plt.plot(xlist[1], ylist[1], 'o', label='FUN2', linestyle='None', marker=style, color='red', markersize=5)
+    plot2 = plt.plot(xlist[1], ylist[1], 'o', label='TEST2', linestyle='None', marker=style, color='red', markersize=5)
     
     #plot2 = plt.plot(xlist[1], ylist[1], 'o', label='NSGAII', linestyle='None', marker=style, color='b', markersize=8)
     #plot3 = plt.plot(xlist[2], ylist[2], 'o', color='black',label='MOEAD-H')

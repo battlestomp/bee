@@ -12,8 +12,10 @@ import jmetal.util.JMException
 
 object test {
   def main(args: Array[String]) {
-    for (i <- 0 until 10) {
-      System.out.print(i)
-    }
+
+    val limitSources = new Array[Int](5)
+
+   for (i <- limitSources.indices) limitSources(i) = 1
+    limitSources.foreach(print)
   }
 }
