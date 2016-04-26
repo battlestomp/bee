@@ -28,7 +28,7 @@ class Source(nfoods:Int, mlimit:Int){
 class MultiBee(mproblem:Problem, nfoods:Int, mlimit:Int, iter:Int) extends Algorithm(mproblem:Problem){
   var Food:Source = new Source(nfoods, mlimit)
   val Iterations = iter
-  //var NoDominations:NonDominatedSolutionList = new NonDominatedSolutionList()
+  var NoDominations:NonDominatedSolutionList = new NonDominatedSolutionList()
   var MultiProblem:Problem = mproblem
   val DominaceCompare:DominanceComparator = new DominanceComparator()
 
@@ -90,13 +90,11 @@ class MultiBee(mproblem:Problem, nfoods:Int, mlimit:Int, iter:Int) extends Algor
     MultiProblem.evaluate(newsolution)
     var flagDominate = DominaceCompare.compare(newsolution, cursolution)
     if (flagDominate == -1) {
-      //newsolution dominate cursolution
       Food.Sources.replace(i, newsolution)
       Food.LimitSources(i) = 0
     } else {
       Food.LimitSources(i) = Food.LimitSources(i) + 1
     }
-    //NoDominations.add(newsolution)
   }
   def UpdateSolution(cur:Solution, next:Solution): Solution ={
     var newsolution:Solution = new Solution(cur)
@@ -128,8 +126,11 @@ class MultiBee(mproblem:Problem, nfoods:Int, mlimit:Int, iter:Int) extends Algor
       SendOnlookerBees()
       SendScoutBees()
     }
+    for (i <- 0 until nfoods)
+      NoDominations.add(Food.Sources.get(i))
     return Food.Sources
   }
+  def NoDominateSolution() = NoDominations
   def main(args: Array[String]) {
 
   }

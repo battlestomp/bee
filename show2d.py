@@ -65,8 +65,8 @@ def ShowPic(Xlist, Ylist):
     #plt.show()
 if __name__ == '__main__':
     #Datalist = ReadDataFile('..\data/fun_nsgaii_a0')
-    Datalist1 = ReadDataFile('TEST1')
-    Datalist2 = ReadDataFile('TEST2')
+    Datalist1 = ReadDataFile('FUN1')
+    Datalist2 = ReadDataFile('FUN2')
     #Datalist3 = ReadDataFile('..\data/uav_moeadl1')
     markers = []
     for m in Line2D.markers:
